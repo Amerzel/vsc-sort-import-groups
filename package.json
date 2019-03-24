@@ -1,0 +1,49 @@
+{
+	"name": "sort-imports-comscore",
+	"displayName": "sort-imports-comscore",
+	"description": "Comscore Linear Frontend Team's import sorter",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:sort-imports-comscore.helloWorld",
+		"onCommand:sort-imports-comscore.sortDocument"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "sort-imports-comscore.helloWorld",
+				"title": "Hello World"
+			},
+			{
+				"command": "sort-imports-comscore.sortDocument",
+				"title": "Sort Document Imports"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"dependencies": {
+		"import-sort": "^6.0.0",
+		"import-sort-config": "^6.0.0",
+		"import-sort-parser-babylon": "^6.0.0",
+		"rxjs": "^6.4.0"
+	},
+	"devDependencies": {
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28",
+		"tslint": "^5.12.1",
+		"@types/node": "^10.12.21",
+		"@types/mocha": "^2.2.42"
+	}
+}

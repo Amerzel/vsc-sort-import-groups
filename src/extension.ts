@@ -3,7 +3,7 @@ import { commands, ExtensionContext, window } from 'vscode';
 import { sortCurrentDocument } from './sort';
 import { Logger } from './logger';
 
-export const EXTENSION_NAME = 'sort-imports-comscore';
+export const EXTENSION_NAME = 'vsc-sort-imports-groups';
 
 export function activate(context: ExtensionContext) {
 	console.log(`"${EXTENSION_NAME}" activated.`);

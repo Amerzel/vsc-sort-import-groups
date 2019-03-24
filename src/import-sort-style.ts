@@ -1,23 +1,23 @@
 import { IStyleAPI, IStyleItem } from "import-sort-style";
-import { IImport } from 'import-sort-parser';
-import { Logger } from './logger';
 
 export default function (styleApi: IStyleAPI): IStyleItem[] {
   const {
     always,
-    and,
     isRelativeModule,
     member,
+    moduleName,
     name,
-    not,
     or,
+    startsWith,
     unicode,
   } = styleApi;
 
   return [
     // import {…} from "angular";
     {
-      match: isAngular,
+      match: or(
+        moduleName(startsWith('@angular'))
+      ),
       sort: member(unicode),
       sortNamedMembers: name(unicode),
     },
@@ -25,10 +25,8 @@ export default function (styleApi: IStyleAPI): IStyleItem[] {
 
     // import {…} from "rxjs" || "@ng-bootstrap" || "moment";
     {
-      match: and(
-        not(isRelativeModule),
-        not(isApi),
-        not(isApp),
+      match: or(
+        moduleName(startsWith('rxjs'))
       ),
       sort: member(unicode),
       sortNamedMembers: name(unicode),
@@ -37,7 +35,9 @@ export default function (styleApi: IStyleAPI): IStyleItem[] {
 
     // import {…} from "api";
     {
-      match: isApi,
+      match: or(
+        moduleName(startsWith('api'))
+      ),
       sort: member(unicode),
       sortNamedMembers: name(unicode),
     },
@@ -47,7 +47,7 @@ export default function (styleApi: IStyleAPI): IStyleItem[] {
     {
       match: or(
         isRelativeModule,
-        isApp,
+        moduleName(startsWith('app')),
       ),
       sort: member(unicode),
       sortNamedMembers: name(unicode),
@@ -57,24 +57,9 @@ export default function (styleApi: IStyleAPI): IStyleItem[] {
     // Catch all, nothing should make it this far
     {
       match: always,
-      sort: member(unicode),
+      sort: moduleName(unicode),
       sortNamedMembers: name(unicode),
     },
     { separator: true },
   ];
-}
-
-function isAngular(imported: IImport): boolean {
-  console.error('isAngular', imported.moduleName, imported.moduleName.startsWith('angular'));
-  return imported.moduleName.startsWith('angular');
-}
-
-function isApi(imported: IImport): boolean {
-  console.error('isApi', imported.moduleName, imported.moduleName.startsWith('api'));
-  return imported.moduleName.startsWith('api');
-}
-
-function isApp(imported: IImport): boolean {
-  console.error('isApp', imported.moduleName, imported.moduleName.startsWith('app'));
-  return imported.moduleName.startsWith('app');
 }

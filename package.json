@@ -1,27 +1,27 @@
 {
-	"name": "sort-imports-comscore",
-	"displayName": "sort-imports-comscore",
-	"description": "Comscore Linear Frontend Team's import sorter",
-	"version": "0.0.1",
+	"name": "vsc-sort-imports-groups",
+	"displayName": "vsc-sort-imports-groups",
+	"description": "Visual Studio Code Sort Imports by Groups",
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.32.0"
 	},
 	"categories": [
-		"Other"
+		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:sort-imports-comscore.helloWorld",
-		"onCommand:sort-imports-comscore.sortDocument"
+		"onCommand:vsc-sort-imports-groups.helloWorld",
+		"onCommand:vsc-sort-imports-groups.sortDocument"
 	],
-	"main": "./out/extension.js",
+	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "sort-imports-comscore.helloWorld",
+				"command": "vsc-sort-imports-groups.helloWorld",
 				"title": "Hello World"
 			},
 			{
-				"command": "sort-imports-comscore.sortDocument",
+				"command": "vsc-sort-imports-groups.sortDocument",
 				"title": "Sort Document Imports"
 			}
 		]
@@ -37,6 +37,7 @@
 		"import-sort": "^6.0.0",
 		"import-sort-config": "^6.0.0",
 		"import-sort-parser-babylon": "^6.0.0",
+		"import-sort-parser-typescript": "^6.0.0",
 		"rxjs": "^6.4.0"
 	},
 	"devDependencies": {

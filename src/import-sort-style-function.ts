@@ -13,6 +13,21 @@ export function importSortStyleFunction(sortGroups: string[][]): IStyle {
       unicode,
     } = styleApi;
 
+    function sortCaseInsensitiveComparator(first: string, second: string): number {
+      return unicode(first.toLowerCase(), second.toLowerCase());
+    }
+
+    sortGroups.map((sortGroup) => {
+      return sortGroup.map((sortItem) => {
+        return [
+          {
+            match: moduleName(startsWith(sortItem)),
+            sort: member(sortCaseInsensitiveComparator)
+          }
+        ];
+      });
+    });
+
     return [
       // import {…} from "angular";
       {

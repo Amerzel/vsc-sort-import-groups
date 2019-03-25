@@ -24,7 +24,30 @@
 				"command": "vsc-sort-imports-groups.sortDocument",
 				"title": "Sort Document Imports"
 			}
-		]
+		],
+		"configuration": {
+			"title": "VSC Sort Imports Groups configuration",
+			"properties": {
+				"sort-imports.on-save": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically sort imports on save."
+				},
+				"sort-imports.sort-groups": {
+					"type": "array",
+					"default": [],
+					"description": "Groups description"
+				},
+				"sort-imports.languages": {
+					"type": "array",
+					"default": [
+						"javascript",
+						"typescript"
+					],
+					"description": "Languages to sort on save."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

@@ -1,4 +1,4 @@
-import { commands, ExtensionContext, window } from 'vscode';
+import { commands, ExtensionContext, window, workspace } from 'vscode';
 
 import { sortCurrentDocument } from './sort';
 import { Logger } from './logger';
@@ -27,4 +27,8 @@ function registerCommands() {
 
 function addSubscriptions(context: ExtensionContext) {
 	context.subscriptions.push(Logger.getChannel());
+}
+
+export function getConfiguration<T>(key: string): T | undefined{
+	return workspace.getConfiguration(EXTENSION_NAME).get<T>(key);
 }

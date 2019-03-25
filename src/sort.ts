@@ -6,8 +6,9 @@ import importSort from 'import-sort';
 import { DEFAULT_CONFIGS, getConfig } from 'import-sort-config';
 import * as importSortParserBabylon from 'import-sort-parser-babylon';
 
-import importSortStyle from './import-sort-style';
+import { importSortStyleFunction } from './import-sort-style-function';
 import { Logger } from './logger';
+import { getConfiguration } from './extension';
 
 const defaultLanguages = [
   'javascript',
@@ -52,6 +53,8 @@ export function sort(document: TextDocument): string | undefined{
 
     console.info('cachedOptions', cachedOptions);
 
+    const importSortStyle = importSortStyleFunction(getConfiguration<string[][]>('sort-groups') || []);
+
     const result = importSort(document.getText(), importSortParserBabylon, importSortStyle, fileName, cachedOptions);
 
     Logger.info('sortCurrentDocument end');
@@ -59,6 +62,7 @@ export function sort(document: TextDocument): string | undefined{
     return result.code;
   } catch (exception) {
     window.showWarningMessage(`Error sorting imports: ${exception}`);
+    Logger.info(`Error sorting imports: ${exception}`);
 
     return;
   }

@@ -34,9 +34,22 @@
 					"description": "Automatically sort imports on save."
 				},
 				"sort-imports.sort-groups": {
+					"title": "Import Sort Group Definitions",
+					"description": "Groups description",
 					"type": "array",
-					"default": [],
-					"description": "Groups description"
+					"items": {
+						"properties": {
+							"modules": {
+								"description": "modules description",
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							},
+							"blank-line": "boolean"
+						}
+					},
+					"default": []
 				},
 				"sort-imports.languages": {
 					"type": "array",

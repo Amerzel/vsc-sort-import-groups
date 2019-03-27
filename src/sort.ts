@@ -55,6 +55,7 @@ export function sort(document: TextDocument): string | undefined{
 
     const importSortStyle = importSortStyleFunction(getConfiguration<string[][]>('sort-groups') || []);
 
+    console.error(document.getText());
     const result = importSort(document.getText(), importSortParserBabylon, importSortStyle, fileName, cachedOptions);
 
     Logger.info('sortCurrentDocument end');

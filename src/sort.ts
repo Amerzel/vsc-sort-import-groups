@@ -17,8 +17,8 @@ const defaultLanguages = [
 
 let cachedOptions: object;
 
-export function sortCurrentDocument() {
-  Logger.info('sortCurrentDocument start');
+export function sortModules() {
+  Logger.info('sortModules start');
 
   const activeTextEditor = window.activeTextEditor;
 
@@ -58,7 +58,7 @@ export function sort(document: TextDocument): string | undefined{
     console.error(document.getText());
     const result = importSort(document.getText(), importSortParserBabylon, importSortStyle, fileName, cachedOptions);
 
-    Logger.info('sortCurrentDocument end');
+    Logger.info('sortModules end');
 
     return result.code;
   } catch (exception) {

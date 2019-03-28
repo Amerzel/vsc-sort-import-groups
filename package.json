@@ -10,54 +10,43 @@
 		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:vsc-sort-imports-groups.helloWorld",
-		"onCommand:vsc-sort-imports-groups.sortDocument"
+		"onCommand:vsc-sort-imports-groups.sortModules"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "vsc-sort-imports-groups.helloWorld",
-				"title": "Hello World"
-			},
-			{
-				"command": "vsc-sort-imports-groups.sortDocument",
+				"command": "vsc-sort-imports-groups.sortModules",
 				"title": "Sort Document Imports"
 			}
 		],
 		"configuration": {
 			"title": "VSC Sort Imports Groups configuration",
 			"properties": {
-				"sort-imports.on-save": {
+				"sort-imports-groups.on-save": {
 					"type": "boolean",
 					"default": true,
 					"description": "Automatically sort imports on save."
 				},
-				"sort-imports.sort-groups": {
-					"title": "Import Sort Group Definitions",
-					"description": "Groups description",
+				"sort-imports-groups.sort-groups": {
+					"title": "Import Sort Groups",
+					"description": "Nested array of strings that exactly match the first word of the module import path. Use . or .. to match relative imports. Module groups will be separated with a blank line.",
 					"type": "array",
 					"items": {
-						"properties": {
-							"modules": {
-								"description": "modules description",
-								"type": "array",
-								"items": {
-									"type": "string"
-								}
-							},
-							"blank-line": "boolean"
+						"type": "array",
+						"items": {
+							"type": "string"
 						}
 					},
 					"default": []
 				},
-				"sort-imports.languages": {
+				"sort-imports-groups.languages": {
 					"type": "array",
 					"default": [
 						"javascript",
 						"typescript"
 					],
-					"description": "Languages to sort on save."
+					"description": "Languages to sort"
 				}
 			}
 		}

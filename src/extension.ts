@@ -1,6 +1,6 @@
-import { commands, ExtensionContext, window, workspace } from 'vscode';
+import { commands, ExtensionContext, workspace } from 'vscode';
 
-import { sortCurrentDocument } from './sort';
+import { sortModules } from './sort';
 import { Logger } from './logger';
 
 export const EXTENSION_NAME = 'vsc-sort-imports-groups';
@@ -19,10 +19,7 @@ export function deactivate() {
 }
 
 function registerCommands() {
-	commands.registerCommand(`${EXTENSION_NAME}.helloWorld`, () => {
-		window.showInformationMessage('Hello World!');
-	});
-	commands.registerCommand(`${EXTENSION_NAME}.sortDocument`, sortCurrentDocument);
+	commands.registerCommand(`${EXTENSION_NAME}.sortModules`, sortModules);
 }
 
 function addSubscriptions(context: ExtensionContext) {

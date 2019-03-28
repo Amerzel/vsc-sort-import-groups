@@ -3,7 +3,7 @@ import { commands, ExtensionContext, workspace } from 'vscode';
 import { sortModules } from './sort';
 import { Logger } from './logger';
 
-export const EXTENSION_NAME = 'vsc-sort-imports-groups';
+export const EXTENSION_NAME = 'vsc-sort-import-groups';
 
 export function activate(context: ExtensionContext) {
 	console.log(`"${EXTENSION_NAME}" activated.`);

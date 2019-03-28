@@ -1,6 +1,6 @@
-# sort-imports-comscore README
+# vsc-sort-import-groups README
 
-This is the README for your extension "sort-imports-comscore". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "vsc-sort-import-groups". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 

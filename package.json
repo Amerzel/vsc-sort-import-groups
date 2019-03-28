@@ -1,6 +1,6 @@
 {
-	"name": "vsc-sort-imports-groups",
-	"displayName": "vsc-sort-imports-groups",
+	"name": "vsc-sort-import-groups",
+	"displayName": "vsc-sort-import-groups",
 	"description": "Visual Studio Code Sort Imports by Groups",
 	"version": "0.1.0",
 	"engines": {
@@ -10,25 +10,25 @@
 		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:vsc-sort-imports-groups.sortModules"
+		"onCommand:vsc-sort-import-groups.sortModules"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "vsc-sort-imports-groups.sortModules",
+				"command": "vsc-sort-import-groups.sortModules",
 				"title": "Sort Document Imports"
 			}
 		],
 		"configuration": {
 			"title": "VSC Sort Imports Groups configuration",
 			"properties": {
-				"sort-imports-groups.on-save": {
+				"sort-import-groups.on-save": {
 					"type": "boolean",
 					"default": true,
 					"description": "Automatically sort imports on save."
 				},
-				"sort-imports-groups.sort-groups": {
+				"sort-import-groups.sort-groups": {
 					"title": "Import Sort Groups",
 					"description": "Nested array of strings that exactly match the first word of the module import path. Use . or .. to match relative imports. Module groups will be separated with a blank line.",
 					"type": "array",
@@ -40,7 +40,7 @@
 					},
 					"default": []
 				},
-				"sort-imports-groups.languages": {
+				"sort-import-groups.languages": {
 					"type": "array",
 					"default": [
 						"javascript",

@@ -1,6 +1,6 @@
 # Change Log
 
-All notable changes to the "sort-imports-comscore" extension will be documented in this file.
+All notable changes to the "vsc-sort-import-groups" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 

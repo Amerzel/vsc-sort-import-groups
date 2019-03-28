@@ -9,6 +9,7 @@ import { importSortStyleFunction } from '../import-sort-style-function';
 
 const getMockText = (): string => {
   return `import { Router } from '@angular/router';
+import { Store } from '@angular-redux/store';
 import { ViewChild, Component, OnInit } from '@angular/core';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 import { filter } from 'lodash';
@@ -31,7 +32,7 @@ const importSortStyle = importSortStyleFunction([
   ['@angular'],
   ['rxjs', 'lodash'],
   ['api'],
-  ['app', './']
+  ['app', '.', '..']
 ]);
 
 suite("Sort Tests", () => {
@@ -44,6 +45,21 @@ suite("Sort Tests", () => {
       {}
     );
 
-    console.error(result.code);
+    assert.equal(result.code, `import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { combineLatest } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
+import { filter } from 'lodash';
+
+import { FilterSet } from 'api/database/models/frontend/filter-set';
+import { RegionType } from 'api/rapids/payload/region-type';
+import { ReportType } from 'api/rapids/reports/report-type';
+
+import { AppComponent } from 'app/app.component.ts';
+import { ReportComponent } from './report.component.ts';
+
+import { Store } from '@angular-redux/store';
+`);
   });
 });

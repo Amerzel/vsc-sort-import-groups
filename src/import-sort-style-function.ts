@@ -1,15 +1,21 @@
-import { IStyleAPI, IStyle, IStyleItem } from "import-sort-style";
+import { IStyleAPI, IStyle, IStyleItem, IPredicateFunction } from "import-sort-style";
+
+function matches(regExp: string): IPredicateFunction {
+  const re = new RegExp(`^${regExp}(\/|$)`);
+
+  return (text) => {
+    return re.test(text);
+  };
+}
 
 export function importSortStyleFunction(sortGroups: string[][]): IStyle {
   return (styleApi: IStyleAPI) => {
     const {
       always,
-      isRelativeModule,
       member,
       moduleName,
       name,
       or,
-      startsWith,
       unicode,
     } = styleApi;
 
@@ -20,11 +26,15 @@ export function importSortStyleFunction(sortGroups: string[][]): IStyle {
     const styleItems: IStyleItem[] = [];
 
     sortGroups.forEach((sortGroup) => {
+      const matchers = sortGroup.map((module) => {
+        return moduleName(matches(module));
+      });
+
       styleItems.push(
         {
           separator: false,
           match: or(
-            moduleName(startsWith(...sortGroup))
+            ...matchers
           ),
           sort: member(sortCaseInsensitiveComparator),
           sortNamedMembers: name(sortCaseInsensitiveComparator)
@@ -48,56 +58,5 @@ export function importSortStyleFunction(sortGroups: string[][]): IStyle {
     console.error(styleItems);
 
     return styleItems;
-
-    return [
-      // import {…} from "angular";
-      {
-        match: or(
-          moduleName(startsWith(...['@angular']))
-        ),
-        sort: member(sortCaseInsensitiveComparator),
-        sortNamedMembers: name(sortCaseInsensitiveComparator),
-      },
-      { separator: true },
-
-      // import {…} from "rxjs" || "@ng-bootstrap" || "moment";
-      {
-        match: or(
-          moduleName(startsWith('rxjs', 'lodash')),
-        ),
-        sort: member(sortCaseInsensitiveComparator),
-        sortNamedMembers: name(sortCaseInsensitiveComparator),
-      },
-      { separator: true },
-
-      // import {…} from "api";
-      {
-        match: or(
-          moduleName(startsWith('api')),
-        ),
-        sort: member(sortCaseInsensitiveComparator),
-        sortNamedMembers: name(sortCaseInsensitiveComparator),
-      },
-      { separator: true },
-
-      // import {…} from "app/" || "./";
-      {
-        match: or(
-          moduleName(startsWith('app')),
-          isRelativeModule
-        ),
-        sort: member(sortCaseInsensitiveComparator),
-        sortNamedMembers: name(sortCaseInsensitiveComparator),
-      },
-      { separator: true },
-
-      // Catch all, nothing should make it this far
-      {
-        match: always,
-        sort: moduleName(sortCaseInsensitiveComparator),
-        sortNamedMembers: name(sortCaseInsensitiveComparator),
-      },
-      { separator: true },
-    ];
   };
 }

@@ -1,6 +1,6 @@
 import { IStyleAPI, IStyle, IStyleItem, IPredicateFunction } from "import-sort-style";
 
-function matches(regExp: string): IPredicateFunction {
+function moduleNameMatches(regExp: string): IPredicateFunction {
   const re = new RegExp(`^${regExp}(\/|$)`);
 
   return (text) => {
@@ -27,7 +27,7 @@ export function importSortStyleFunction(sortGroups: string[][]): IStyle {
 
     sortGroups.forEach((sortGroup) => {
       const matchers = sortGroup.map((module) => {
-        return moduleName(matches(module));
+        return moduleName(moduleNameMatches(module));
       });
 
       styleItems.push(

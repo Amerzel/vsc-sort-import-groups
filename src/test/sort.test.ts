@@ -1,10 +1,9 @@
 import * as assert from 'assert';
+import * as importSortParserBabylon from 'import-sort-parser-babylon';
 
 import { TextDocument, Uri } from 'vscode';
 
 import importSort from 'import-sort';
-import * as importSortParserBabylon from 'import-sort-parser-babylon';
-
 import { importSortStyleFunction } from '../import-sort-style-function';
 
 const getMockText = (): string => {

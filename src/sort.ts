@@ -1,14 +1,13 @@
-import { dirname, extname } from 'path';
-
-import { TextDocument, window, Range } from 'vscode';
-
-import importSort from 'import-sort';
-import { DEFAULT_CONFIGS, getConfig } from 'import-sort-config';
 import * as importSortParserBabylon from 'import-sort-parser-babylon';
 
-import { importSortStyleFunction } from './import-sort-style-function';
+import { DEFAULT_CONFIGS, getConfig } from 'import-sort-config';
+import { Range, TextDocument, window } from 'vscode';
+import { dirname, extname } from 'path';
+
 import { Logger } from './logger';
 import { getConfiguration } from './extension';
+import importSort from 'import-sort';
+import { importSortStyleFunction } from './import-sort-style-function';
 
 const defaultLanguages = [
   'javascript',
@@ -51,7 +50,13 @@ export function sort(document: TextDocument): string | undefined{
       cachedOptions = sortConfig.config.options || {};
     }
 
-    console.info('cachedOptions', cachedOptions);
+    cachedOptions = {
+      ...cachedOptions,
+      sampleOption: ['Sample One']
+    };
+
+    console.error('sortConfig', sortConfig);
+    console.error('cachedOptions', cachedOptions);
 
     const importSortStyle = importSortStyleFunction(getConfiguration<string[][]>('sort-groups') || []);
 

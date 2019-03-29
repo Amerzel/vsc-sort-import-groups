@@ -1,4 +1,4 @@
-import { IStyleAPI, IStyle, IStyleItem, IPredicateFunction } from "import-sort-style";
+import { IPredicateFunction, IStyle, IStyleAPI, IStyleItem } from "import-sort-style";
 
 function moduleNameMatches(regExp: string): IPredicateFunction {
   const re = new RegExp(`^${regExp}(\/|$)`);
@@ -9,7 +9,9 @@ function moduleNameMatches(regExp: string): IPredicateFunction {
 }
 
 export function importSortStyleFunction(sortGroups: string[][]): IStyle {
-  return (styleApi: IStyleAPI) => {
+  return (styleApi: IStyleAPI, file?: string, options?: object) => {
+    console.error('OPTIONS!', JSON.stringify(options));
+
     const {
       always,
       member,
